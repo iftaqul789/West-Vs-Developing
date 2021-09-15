@@ -72,6 +72,13 @@ gapminder %>%filter(year %in% c(1970,2010) & !is.na(gdp & country %in% countries
   ggplot(aes(x = dollars_per_day, y = ..count.., fill = group )) + geom_density(alpha = .45) +
   scale_x_continuous(trans = "log2") + theme_light() + ggtitle("west vs developing 1970 vs 2010")+ facet_grid(year~group)
 
+#gdp continent wise
+
+gapminder %>% filter(year == c(1970,2010) & !is.na(gdp & country %in% countries))%>%
+  mutate(continent = reorder(continent,per_day_gdp,median)) %>% ggplot(aes(continent,per_day_gdp, fill = factor(year))) + geom_boxplot()+ scale_y_continuous(trans = "log2") + theme_light()
+
+# from the plot it is clear that per day gdp of deveoloping countries increased while western countries decreased.
+
 
 
 
